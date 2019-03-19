@@ -5,6 +5,22 @@ import java.util.Date;
 public class CommentDomain {
     private int articleId;
 
+
+    private int fromId;
+    private int toId;
+    private String content;
+
+    public String getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(String commentTime) {
+        this.commentTime = commentTime;
+    }
+
+    private String commentTime;
+
+
     public int getArticleId() {
         return articleId;
     }
@@ -36,22 +52,6 @@ public class CommentDomain {
     public void setContent(String content) {
         this.content = content;
     }
-
-
-    private int fromId;
-    private int toId;
-    private String content;
-
-    public String getCommentTime() {
-        return commentTime;
-    }
-
-    public void setCommentTime(String commentTime) {
-        this.commentTime = commentTime;
-    }
-
-    private String commentTime;
-
 
 
 

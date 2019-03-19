@@ -25,9 +25,9 @@ public class ArticleController {
         return "home";
     }
 
-    @GetMapping("/edit/{article_id}")
-    public String editArticle(HttpServletRequest request, @PathVariable("article_id") int article_id){
-        ArticleDomain article = articleService.selectById(article_id);
+    @GetMapping("/edit/{articleId}")
+    public String editArticle(HttpServletRequest request, @PathVariable("articleId") int articleId){
+        ArticleDomain article = articleService.selectById(articleId);
         request.setAttribute("article",article);
         return "article_edit";
     }
@@ -46,14 +46,16 @@ public class ArticleController {
             articleDomain.setWriteTime(date);
             articleService.addArticle(articleDomain);
         }
-        else articleService.updateArticle(articleDomain);
+        else {
+            System.out.print("asd");
+            articleService.updateArticle(articleDomain);
+        }
         return "{success}";
     }
 
     //将数据库中的所有文章列出来
     @GetMapping("list")
     public String list(HttpServletRequest request){
-
         List<ArticleDomain> articleDomains = articleService.listArticle();
         request.setAttribute("article_list",articleDomains);
         return "article_list";

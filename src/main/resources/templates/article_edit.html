@@ -15,7 +15,7 @@
 
     <form id="articleForm" role="form" novalidate="novalidate">
         <input type="hidden" name="articleId"
-               th:value="${article!=null}?${article.articleId}: ''" id="articleid"/>
+               th:value="${article!=null} ? ${article.articleId}: ''" id="articleId"/>
     <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">文章标题</label>
@@ -64,50 +64,24 @@
 
         <button class="layui-btn"  id = "button1">保存并发表</button>
 
-
     </form>
 
     <script th:src="@{/js/jquery.app.js}"></script>
     <script th:src="@{/js/base.js}"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/editormd/editormd.js"></script>
-
-
     <script th:src="@{/js/jquery.tagsinput.min.js}"></script>
     <script th:src="@{/js/jquery.quicksearch.js}"></script>
-
-
-
-
-
-
     <script th:src="@{//cdn.bootcss.com/multi-select/0.9.12/js/jquery.multi-select.min.js}"></script>
     <script th:src="@{//cdn.bootcss.com/select2/3.4.8/select2.min.js}"></script>
     <script th:src="@{//cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js}"></script>
 
     <script type="text/javascript">
-        //$(document).ready(function(){
             $("#button1").click(function(){
-                /*
-                var title = $('#articleForm input[name=title]').val();<!-- 寻找id=="articleForm"input 中name=="title"的标签-->
-                var content = $('#text').val();
-                //alert(title);
-                //console.log('hello2');
-                if (title == '') {
-                    alert('请输入文章标题');
-                    return;
-                }
-                if (content == '') {
-                    alert('请输入文章内容');
-                    return;
-                }*/
-
-                //var params = $("#articleForm").serialize();
-                //console.log(params);
-
-//    var url = $('#articleForm #articleid').val() != '' ? '/modifyArticle' : '/publishArticle';
-                var article_id = $('#articleid').val();
+                var articleId = $('#articleId').val();
+                //alert(articleId);
                 var title = $('#title').val();
+                //console.log(title);
                 var type1 = $('#type1').val();
                 var type2 = $('#type2').val();
                 var type3 = $('#type3').val();
@@ -116,10 +90,9 @@
                 $.ajax({
                     url:"/publish",
                     data: JSON.stringify({
-                            article_id: article_id, title: title, type1: type1,  type2: type2, type3: type3, content: content}
-                    ) ,
+                    'articleId': articleId, 'title': title, 'type1': type1,  'type2': type2, 'type3': type3, 'content': content}),
                     type:"POST",
-                    contentType:"application/json",
+                    contentType: "application/json;charset=utf-8",
                     success: function () {
                         alert("发布成功");
                     },
@@ -127,28 +100,7 @@
                         alert("发布失败");
                     }
                 })
-                /*
-                $.post(
-                    "/newfile",
-                    params,
-                    function (result) {
-                        if (result && result.code == 'success') {
-                            tale.alertOk({
-                                text:'文章保存成功',
-                                then: function () {
-                                    setTimeout(function () {
-                                        window.location.href = '/admin/article';
-                                    }, 500);
-                                }
-                            });
-                        } else {
-                            tale.alertError(result.msg || '保存文章失败');
-                        }
-                    }
-                );*/
             });
-
-        //});
         $(function() {
             editormd("my-editormd", {//注意1：这里的就是上面的DIV的id属性值
                 width   : "90%",
@@ -173,13 +125,9 @@
             var content = $('#text').val();
             console.log(title);
             console.log('hello1');
-
-
             var params = $("#articleForm").serialize();
             console.log(params);
             console.log('hello1');
-//    var url = $('#articleForm #articleid').val() != '' ? '/modifyArticle' : '/publishArticle';
-
             $.post({
                 url:'/newfile1',
                 data:params,

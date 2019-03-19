@@ -36,7 +36,7 @@
                                     </td>
                                     <td><th:block th:text="${article.writeTime}"/></td>
 
-                                    <td><th:block th:text="${article.type1}+ ${article.type2} + ${article.type3}" /></td>
+                                    <td><th:block th:text="${article.type1}+' ' + ${article.type2} + ' ' +${article.type3}" /></td>
 
                                     <td>
                                         <a th:href="@{'/edit/'+${article.articleId}}"

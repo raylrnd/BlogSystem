@@ -5,6 +5,16 @@ public class ArticleDomain {
 
 
     private Integer articleId;
+    private String content;
+    private String writeTime;
+    private String title;
+    private int likeCount;
+    private int score;
+    private int commentCount;
+    private String type1;
+    private String type2;
+    private String type3;
+
 
     public Integer getArticleId() {
         return articleId;
@@ -85,17 +95,6 @@ public class ArticleDomain {
     public void setType3(String type3) {
         this.type3 = type3;
     }
-
-    private String content;
-    private String writeTime;
-    private String title;
-    private int likeCount;
-    private int score;
-    private int commentCount;
-    private String type1;
-    private String type2;
-    private String type3;
-
 
 
 
