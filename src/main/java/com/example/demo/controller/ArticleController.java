@@ -3,11 +3,15 @@ package com.example.demo.controller;
 import com.example.demo.model.ArticleDomain;
 import com.example.demo.service.ArticleService;
 import com.example.demo.utils.APIResponse;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -68,19 +72,26 @@ public class ArticleController {
     }
     */
     @PostMapping ("/newfile")
+    @ResponseBody
     public String Publish(
-            @RequestBody ArticleDomain articleDomain
+            @RequestBody ArticleDomain articleDomain,
+            HttpServletResponse response
         ) {
         System.out.print("hello");
+        //try {
+            if(articleDomain.getArticle_id() == null)  {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
+                articleDomain.setWrite_time(date);
+                articleService.addArticle(articleDomain);
+            }
+            else articleService.updateArticle(articleDomain);
 
-        if(articleDomain.getArticle_id() == null)  {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
-            articleDomain.setWrite_time(date);
-            articleService.addArticle(articleDomain);
-        }
-        else articleService.updateArticle(articleDomain);
-        return "article_edit";
+        //}catch (IOException e){
+        //response.write("{\"success\":0}");
+        //}
+
+        return "{success}";
 
     }
     //从前端提交过来的文章在数据库中存在，那么要调用UPDATE语句跟新数据库。
