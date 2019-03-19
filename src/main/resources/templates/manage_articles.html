@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="header::header-body"></div>
+<div class="col-sm-8">
+            <span th:each="i: ${#numbers.sequence(0,10)}">
+            <h2>标题</h2>
+            <ul class="list-inline">
+                <li>写作时间</li>
+                <li>2018-09-01 15:30</li>
+                <li>分类</li>
+                <a href="#">前端</a>
+                <li> </li>
+                <a href="#">算法</a>
+                <li>评论数：</li>
+            </ul>
+            <ul class="pager">
+                <li><a href="#">删除文章<span class="label label-danger">危险标签</span></a></li>
+            </ul>
+            <hr>
+
+            </span>
+
+</div>
+</body>
+</html>

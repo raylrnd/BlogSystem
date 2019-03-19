@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Bootstrap 实例 - 一个简单的网页</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .fakeimg {
+            height: 200px;
+            background: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="fakeimg">这边插入图像</div>
+            <br>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">归档</a></li>
+                <li><a href="#">关于我</a></li>
+                <li><a href="#">热门文章</a></li>
+            </ul>
+            <hr class="hidden-sm hidden-md hidden-lg">
+        </div>
+        <span th:each="i: ${#numbers.sequence(0,10)}">
+        <div class="col-sm-8">
+            <h2>标题</h2>
+            <ul class="list-inline">
+                <li>写作时间</li>
+                <li>2018-09-01 15:30</li>
+                <li>分类</li>
+                <a href="#">前端</a>
+                <li> </li>
+                <a href="#">算法</a>
+                <li>评论数：</li>
+            </ul>
+            <p>一些文本..</p>
+            <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
+
+            <ul class="pager">
+                <li class="next"><a href="#">Read More <span aria-hidden="true">&rarr;</span></a></li>
+            </ul>
+            <hr>
+
+            <h2>标题</h2>
+            <h5>副标题</h5>
+            <p>一些文本..</p>
+            <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
+            <nav aria-label="...">
+                <ul class="pager">
+                    <li class="next"><a href="#">Read More <span aria-hidden="true">&rarr;</span></a></li>
+                </ul>
+            </nav>
+        </div>
+            </span>
+        <p th:text="'Hello ' + (${name}?:'admin')">3333</p>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>AGasdE</th>
+            </tr>
+            <tr th:each="emp : ${empList}">
+                <td th:text="${emp.id}">1</td>
+                <td th:text="${emp.name}">海</td>
+                <td th:text="${emp.age}">18</td>
+            </tr>
+        </table>
+        <input type="text" name="userName" value="e-learn" th:value="${user.name}" />
+
+    </div>
+</div>
+
+</body>
+</html>

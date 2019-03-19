@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html class="full-height"  lang="en" xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+
+    <link rel="stylesheet" href="/lib/bulma.min.css">
+
+    <link rel="stylesheet" href="/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+    <script src="/lib/jquery.min.js"></script>
+
+    <title>shunchao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Haojen">
+    <meta property="og:url" content="https://haojen.github.io/Claudia-theme-blog/index.html">
+    <meta property="og:site_name" content="Haojen">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Haojen">
+
+    <link rel="alternate" href="/atom.xml" title="Haojen" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+
+    <link rel="stylesheet" href="/lib/common.css">
+    <link rel="stylesheet" href="/lib/nav.css">
+    <link rel="stylesheet" href="/lib/layout.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <link rel="stylesheet" href="/lib/animate.min.css">
+
+    <!-- Bootstrap Core CSS -->
+<!--
+    <link rel="stylesheet" href="../lib/bootstrap.css">
+-->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/lib/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/lib/syntax.css">
+</head>
+
+<body>
+<div th:replace="home_header::home-header"></div>
+<div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+    <div class="main-inner-content">
+        <style>
+            .post-hover:hover {
+                box-shadow: inset 0 0 100px #000;
+                transition: box-shadow .2s;
+            }
+
+            .sub-post-container .post-hover:hover h3 {
+                text-decoration: underline gray;
+            }
+
+
+            .primary-item-main {
+                height: 330px;
+                background-size: cover;
+            }
+
+            .primary-container .title,
+            .primary-container .sub-title,
+            .primary-container .post-content-text,
+            .primary-container .date {
+                color: #fff;
+            }
+
+            .post-content-text {
+                color: #f1f1f1!important;
+            }
+
+            .primary-container .post-hover {
+                background: black;
+            }
+
+            .content-bg-mask {
+                background: rgba(0,0,0,.4);
+            }
+
+        </style>
+
+        <div style="background: #f5f8f9;">
+            <div id="main-container" class="container" style="padding-top: 20px;">
+                <div class="is-flex main-content justify-center">
+                    <section class="column is-9">
+
+                        <!--
+                        文章List
+                        -->
+                        <span th:each="i: ${#numbers.sequence(0,10)}">
+                        <div class="content-box  " style="margin-bottom: 27px;">
+
+                                <div class="columns" style="min-height: 230px;">
+
+                                    <div class="column is-4-desktop is-5-tablet post-avatar is-hidden-mobile"
+                                         style="margin: 10px; background-size: cover;background-image: url('https://williamjepma.files.wordpress.com/2013/09/127_hours1.jpg')">
+                                    </div>
+
+                                    <div class="column is-8-desktop post-content is-flex align-center">
+                                        <div class="content">
+                                            <h3>Images</h3>
+
+                                            <p>
+
+                                            </p>
+                                            <p>
+                                                This is a image test post.
+
+
+                                                图片来自电影《127小时》
+
+
+
+                                                图片来自电影《2001太空漫游》
+
+
+
+                                                图片来自纪录片《寻找小糖人》
+
+
+
+                                            </p>
+                                            <p>2013-12-26</p>
+                                            <a class="post-hover" href="/Claudia-theme-blog/2013/12/25/excerpts/">
+                                                <button class="button is-small">Read More</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                        </span>
+
+                        <hr>
+
+                        <!-- 翻页 pager -->
+
+                        <ul class="pager">
+
+                            <li class="previous">
+                                <a href="/">&larr; Newer Posts</a>
+                            </li>
+
+
+                            <li class="next">
+                                <a href="/page/3/">Older Posts &rarr;</a>
+                            </li>
+
+                        </ul>
+                    </section>
+
+                    <style>
+                        /*user info start*/
+                        .user-info {
+                            padding: 15px 0 0;
+                        }
+
+                        .user-info .avatar {
+                            width: 155px;
+                            height: 155px;
+                            border-radius: 50%;
+                        }
+
+                        .sns-container {
+                            flex-wrap: wrap;
+                        }
+
+                        .sns-container a{
+                            color: black;
+                        }
+                        /*user info end*/
+
+                        /*Tag start*/
+                        #tag_cloud .tags-item{
+                            display: inline-block;
+                            color: #000;
+                            border: 1px solid gray;
+
+                            margin: 4px 2px;
+                            padding: 0 4px;
+                            border-radius: 6px;
+                        }
+                        /*Tag end*/
+
+                        /*Site box start*/
+                        .site-box {
+                            height: 60px;
+                        }
+                        /*Site box end*/
+
+                        .category-list-item,
+                        .archive-list-item {
+                            display: flex;
+                            margin-bottom: 4px;
+                            justify-content: space-between;
+                        }
+                        .category-list-link,
+                        .archive-list-link {
+                            color: black;
+                        }
+
+                        .category-list-count,
+                        .archive-list-count {
+                            width: 32px;
+                            text-align: center;
+                            border-radius: 4px;
+                            color: #fff;
+                            background-color: gray;
+                        }
+                    </style>
+                    <aside class="column is-hidden-touch is-3" style="max-width: 280px; min-width: 230px">
+                        <div class="content-box user-info">
+                            <div class="has-padding">
+                                <header class="has-text-centered">
+                                    <img class="avatar" src="https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-shadow-circle-512.png">
+                                </header>
+                                <section class="has-text-centered">
+                                    <h3><strong>Diskobólos</strong></h3>
+                                    <p class="sub-title">A Touch Of Zen</p>
+
+                                    <p class="is-flex center" style=" color: gray">
+                                        <i class="fa fa-map-marker" style="padding: 5px"></i>
+                                        Hefei
+                                    </p>
+
+                                </section>
+                            </div>
+                            <div class="top-line">
+                                <ul class="sns-container justify-center is-flex has-padding">
+
+
+
+                                    <li>
+                                        <a target="_blank" href="https://baidu.com">
+                                        <span class="fa-stack fa-lg">
+
+                                            <i class="fa fa-weixin" aria-hidden="true" style="font-size: 28px; color: #171a40;"></i>
+                                        </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a target="_blank" href="https://github.com/raylrnd">
+                                        <span class="fa-stack fa-lg">
+
+                                            <i class="fa fa-github" aria-hidden="true" style="font-size: 32px; color: #171a40;"></i>
+                                        </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a target="_blank" href="https://www.zhihu.com/people/margretz">
+                                        <span class="fa-stack fa-lg">
+
+                                            <i class="fa fa-rss" aria-hidden="true" style="font-size: 30px; color: #171a40;"></i>
+                                        </span>
+                                        </a>
+                                    </li>
+
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <!--post数量和tag category 数量-->
+                            <div class="site-box is-flex">
+                                <div class="flex-1 is-flex flex-column center full-height right-line">
+                                    <strong>18</strong>
+                                    <p>Posts</p>
+                                </div>
+                                <div class="flex-1 is-flex flex-column center full-height">
+                                    <strong>6</strong>
+                                    <p>Tags</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-inner content-box">
+                            <div class="has-text-centered">
+                                <strong>Categories</strong>
+                            </div>
+                            <div class="content-inner">
+                                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Claudia-theme-blog/categories/Foo/">Foo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Claudia-theme-blog/categories/Gallery/">Gallery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Claudia-theme-blog/categories/Tags/">Tags</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/Claudia-theme-blog/categories/elements/">elements</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Claudia-theme-blog/categories/excerpts/">excerpts</a><span class="category-list-count">2</span></li></ul>
+                            </div>
+                        </div>
+                        <div class="content-inner content-box">
+                            <div class="has-text-centered">
+                                <strong>Archives</strong>
+                            </div>
+                            <div class="content-inner">
+                                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Claudia-theme-blog/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/Claudia-theme-blog/archives/2013/12/">December 2013</a><span class="archive-list-count">15</span></li></ul>
+                            </div>
+                        </div>
+                        <!--
+                        热门文章实现
+
+                        -->
+
+                    </aside>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div th:replace="footer :: footer"></div>
+<style>
+    #footer {
+        min-height: 10vh;
+        background: black;
+        color: #fff;
+    }
+
+    #footer a {
+        color: #e1e1e1;
+    }
+</style>
+
+
+<script src="/lib/search_core.js"></script>
+<script src="/lib/script.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

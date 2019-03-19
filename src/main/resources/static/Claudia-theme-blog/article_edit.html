@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+    <meta charset="utf-8" />
+    <title>Simple example - Editor.md examples</title>
+    <link rel="stylesheet" href="../editormd/css/editormd.css" />
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+</head>
+<div th:replace="header::header-body"></div>
+<br>
+    <body>
+    <!--
+    <form id="articleForm" role="form" novalidate="novalidate">
+        <input type="hidden" name="categories" id="categories"/>
+        <input type="hidden" name="type" id="type"/>
+        <input type="hidden" name="cid"
+               th:value="${contents!=null and contents.cid!=null}?${contents.cid}: ''" id="cid"/>
+        <input type="hidden" name="status"
+               th:value="${contents!=null and contents.status !=null}?${contents.status}: 'publish'"
+               id="status"/>
+        <input type="hidden" name="content" id="content-editor"/>
+
+-->
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">文章标题</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">文章类别</label>
+            <div class="layui-input-inline">
+                <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+        <div id="layout">
+            <!--
+            <div id="my-editormd">
+                <!--
+                  先判断数据库中有无文章内容，如果有，则把文章内容加载进来，如果没有，则在textarea标签中输入，然后提交。
+
+                <textarea style="display:none;" id="my-text" name="my-text" class="markdown-textarea"
+                          th:utext="${contents!=null and contents.content !=null}?${contents.content}: ''"></textarea>
+                    <textarea id="text" name="text" style="display:none;" > Editor.md directory
+
+    editor.md/
+            lib/
+            css/
+            scss/
+            tests/
+            fonts/
+            images/
+            plugins/
+            examples/
+            languages/
+            editormd.js
+            ...
+
+</textarea>
+            -->
+            <div id="my-editormd">
+                <textarea style="display:none;">[TOC]
+
+#### Disabled options
+
+- TeX (Based on KaTeX);
+- Emoji;
+- Task lists;
+                    </textarea>
+            </div>
+
+            </div>
+        </div>
+
+    <a th:href="@{'/manager/articleDomain/saveFile/'}">
+        <button class="layui-btn" onclick="subArticle(publish)">保存文章</button>
+    </a>
+    <a th:href="@{'/manager/articleDomain/publicFile/'}">
+        <button class="layui-btn">发表文章</button>
+    </a>
+    </form>
+
+    <div th:replace="footer :: footer"></div>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../editormd/editormd.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            editormd("my-editormd", {//注意1：这里的就是上面的DIV的id属性值
+                width   : "90%",
+                height  : 640,
+                syncScrolling : "single",
+                path    : "../editormd/lib/",//注意2：你的路径
+                saveHTMLToTextarea : true,//注意3：这个配置，方便post提交表单
+                /**上传图片相关配置如下*/
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"], //图片上传格式
+                imageUploadURL: "/admin/attach/uploadfile",
+                onload: function (obj) { //上传成功之后的回调
+                }
+            });
+        });
+        </script>
+
+    </body>
+</html>

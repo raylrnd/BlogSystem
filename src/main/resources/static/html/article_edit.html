@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+    <meta charset="utf-8" />
+    <title>Simple example - Editor.md examples</title>
+    <link rel="stylesheet" href="../editormd/css/editormd.css" />
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<br>
+    <body>
+
+
+
+    <form id="articleForm" role="form" novalidate="novalidate">
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">文章标题</label>
+            <input type="text" name="title"
+                   value="ascas" id="title"/>
+
+
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">文章类别</label>
+
+            <input type="text" name="type1"
+                   value="ascas" id="type1"/>
+
+            <input type="text" name="type2"
+                   value="ascdas" id="type2"/>
+
+            <input type="text" name="type3"
+                   value="ascda" id="type3"/>
+        </div>
+    </div>
+
+        <p>点击这个段落。</p>
+        <div id="my-editormd">
+                <textarea style="display:none;">[TOC]
+
+#### Disabled options
+
+- TeX (Based on KaTeX);
+- Emoji;
+- Task lists;
+- HTML tags decode;
+- Flowchart and Sequence Diagram;
+
+#### Editor.md directory
+
+    editor.md/
+            lib/
+            css/
+            scss/
+            tests/
+            fonts/
+            images/
+            plugins/
+            examples/
+            languages/
+            editormd.js
+            ...
+
+```html
+&lt;!-- English --&gt;
+&lt;script src="../dist/js/languages/en.js"&gt;&lt;/script&gt;
+
+&lt;!-- 繁體中文 --&gt;
+&lt;script src="../dist/js/languages/zh-tw.js"&gt;&lt;/script&gt;
+```
+</textarea>
+        </div>
+<!--
+由js代码判断后台传过来的文章的cid是不是为空，如果是，说明数据库里没有这篇文章，
+那么选择发送url：/article/publish
+如果有，那么选择发送url:/article/modify
+-->
+
+        <button class="layui-btn"  id = "button1">保存并发表</button>
+
+
+    </form>
+
+
+    <script src="../editormd/editormd.min.js"></script>
+
+    <script type="text/javascript">
+        //$(document).ready(function(){
+            $("#button1").click(function(){
+
+                var title = $('#articleForm input[name=title]').val();<!-- 寻找id=="articleForm"input 中name=="title"的标签-->
+                var content = $('#text').val();
+
+                console.log('hello2');
+                if (title == '') {
+                    tale.alertWarn('请输入文章标题');
+                    return;
+                }
+                if (content == '') {
+                    tale.alertWarn('请输入文章内容');
+                    return;
+                }
+
+
+                var params = $("#articleForm").serialize();
+                console.log(params);
+                alert(params);
+//    var url = $('#articleForm #articleid').val() != '' ? '/modifyArticle' : '/publishArticle';
+
+                $.post({
+                    url:'/newfile1',
+                    data:params,
+                    success: function (result) {
+                        if (result && result.code == 'success') {
+                            tale.alertOk({
+                                text:'文章保存成功',
+                                then: function () {
+                                    setTimeout(function () {
+                                        window.location.href = '/admin/article';
+                                    }, 500);
+                                }
+                            });
+                        } else {
+                            tale.alertError(result.msg || '保存文章失败');
+                        }
+                    }
+                });
+            });
+        //});
+
+        function subArticle() {
+            console.log('hello1');
+
+
+
+        }
+
+        $(function() {
+            editormd("my-editormd", {//注意1：这里的就是上面的DIV的id属性值
+                width   : "90%",
+                height  : 640,
+                syncScrolling : "single",
+                path    : "../editormd/lib/",//注意2：你的路径
+                saveHTMLToTextarea : true,//注意3：这个配置，方便post提交表单
+                /**上传图片相关配置如下*/
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"], //图片上传格式
+                imageUploadURL: "/admin/attach/uploadfile",
+                onload: function (obj) { //上传成功之后的回调
+                }
+            });
+        });
+        </script>
+
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+
+    </body>
+</html>

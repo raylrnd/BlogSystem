@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="header::headerFragment">
+
+</header>
+<div th:fragment="home-body">
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="fakeimg">这边插入图像</div>
+            <p>文章 ${articleDomain.count} | 评论 ${comment_count} }</p>
+            <br>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="/">首页</a></li>
+                <li><a href="/category">归档</a></li>
+                <li><a href="/aboutme">关于我</a></li>
+                <li><a href="/hot_articles">热门文章</a></li>
+            </ul>
+            <hr class="hidden-sm hidden-md hidden-lg">
+        </div>
+        <div class="col-sm-8">
+            <span th:each="i: ${#numbers.sequence(0,10)}">
+            <h2>标题</h2>
+            <ul class="list-inline">
+                <li>写作时间</li>
+                <li>2018-09-01 15:30</li>
+                <li>分类</li>
+                <a href="#">前端</a>
+                <li> </li>
+                <a href="#">算法</a>
+                <li>评论数：</li>
+            </ul>
+            <p>一些文本..</p>
+            <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！
+            apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1551411805,1551423444; tale_remember_author=sdf; tale_remember_mail=382526825%40qq.com; tale_remember_url=qq.com; __utma=111872281.1805920722.1551785722.1551785722.1551785722.1; __utmz=111872281.1551785722.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+            </p>
+            <ul class="pager">
+                <li class="next"><a href="#">Read More <span aria-hidden="true">&rarr;</span></a></li>
+            </ul>
+            <hr>
+            </span>
+            <h2>标题</h2>
+            <h5>副标题</h5>
+            <p>一些文本..</p>
+            <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！
+
+
+            </p>
+            <nav aria-label="...">
+                <ul class="pager">
+                    <li class="next"><a href="#">Read More <span aria-hidden="true">&rarr;</span></a></li>
+                </ul>
+            </nav>
+        </div>
+
+
+    </div>
+</div>
+
+</div>
+</html>

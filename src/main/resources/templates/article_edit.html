@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+    <meta charset="utf-8" />
+    <title>Simple example - Editor.md examples</title>
+    <link rel="stylesheet" href="/editormd/css/editormd.css" />
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+</head>
+<div th:replace="header::headerFragment"></div>
+<br>
+    <body>
+
+
+
+    <form id="articleForm" role="form" novalidate="novalidate">
+        <input type="hidden" name="article_id"
+               th:value="${article!=null}?${article.article_id}: ''" id="articleid"/>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">文章标题</label>
+
+            <div class="layui-input-inline">
+                <input type="text" name="title"
+                       th:value="${article!=null }? ${article.title}: ''" id="title"/>
+            </div>
+
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">文章类别</label>
+
+            <input type="text" name="type1"
+                   th:value="${article !=null }?${article.type1}: ''" id="type1"/>
+
+            <input type="text" name="type2"
+                   th:value="${article!=null }?${article.type2}: ''" id="type2"/>
+
+            <input type="text" name="type3"
+                   th:value="${article!=null }?${article.type3}: ''" id="type3"/>
+        </div>
+    </div>
+
+        <div id="layout">
+
+            <div id="my-editormd">
+                <!--
+                  先判断数据库中有无文章内容，如果有，则把文章内容加载进来，如果没有，则在textarea标签中输入，然后提交。
+                -->
+
+                <textarea id="editor-md-doc" name="editor-md-doc" style="display:none;"
+                          th:utext="${article!=null }?${article.content}: ''"></textarea>
+                <textarea id="editor-md-html" name="editor-md-html"></textarea>
+
+
+
+            </div>
+        </div>
+<!--
+由js代码判断后台传过来的文章的cid是不是为空，如果是，说明数据库里没有这篇文章，
+那么选择发送url：/article/publish
+如果有，那么选择发送url:/article/modify
+-->
+
+        <button class="layui-btn"  id = "button1">保存并发表</button>
+
+
+    </form>
+
+    <script th:src="@{/js/jquery.app.js}"></script>
+    <script th:src="@{/js/base.js}"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/editormd/editormd.js"></script>
+
+
+    <script th:src="@{/js/jquery.tagsinput.min.js}"></script>
+    <script th:src="@{/js/jquery.quicksearch.js}"></script>
+
+
+
+
+
+
+    <script th:src="@{//cdn.bootcss.com/multi-select/0.9.12/js/jquery.multi-select.min.js}"></script>
+    <script th:src="@{//cdn.bootcss.com/select2/3.4.8/select2.min.js}"></script>
+    <script th:src="@{//cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js}"></script>
+
+    <script type="text/javascript">
+        //$(document).ready(function(){
+            $("#button1").click(function(){
+                /*
+                var title = $('#articleForm input[name=title]').val();<!-- 寻找id=="articleForm"input 中name=="title"的标签-->
+                var content = $('#text').val();
+                //alert(title);
+                //console.log('hello2');
+                if (title == '') {
+                    alert('请输入文章标题');
+                    return;
+                }
+                if (content == '') {
+                    alert('请输入文章内容');
+                    return;
+                }*/
+
+                //var params = $("#articleForm").serialize();
+                //console.log(params);
+
+//    var url = $('#articleForm #articleid').val() != '' ? '/modifyArticle' : '/publishArticle';
+                var article_id = $('#articleid').val();
+                var title = $('#title').val();
+                var type1 = $('#type1').val();
+                var type2 = $('#type2').val();
+                var type3 = $('#type3').val();
+                var content = $("#editor-md-doc").val();
+
+                $.ajax({
+                    url:"/newfile",
+                    data: JSON.stringify({
+                            article_id: article_id, title: title, type1: type1,  type2: type2, type3: type3, content: content}
+                    ) ,
+                    type:"POST",
+                    contentType:"application/json",
+                    success: function () {
+                        alert("发布成功");
+                    },
+                    error: function () {
+                        alert("发布失败");
+                    }
+                })
+                /*
+                $.post(
+                    "/newfile",
+                    params,
+                    function (result) {
+                        if (result && result.code == 'success') {
+                            tale.alertOk({
+                                text:'文章保存成功',
+                                then: function () {
+                                    setTimeout(function () {
+                                        window.location.href = '/admin/article';
+                                    }, 500);
+                                }
+                            });
+                        } else {
+                            tale.alertError(result.msg || '保存文章失败');
+                        }
+                    }
+                );*/
+            });
+
+        //});
+        $(function() {
+            editormd("my-editormd", {//注意1：这里的就是上面的DIV的id属性值
+                width   : "90%",
+                height  : 640,
+                syncScrolling : "single",
+                path    : "/editormd/lib/",//注意2：你的路径
+                saveHTMLToTextarea : true,//注意3：这个配置，方便post提交表单
+                /**上传图片相关配置如下*/
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"], //图片上传格式
+                imageUploadURL: "/admin/attach/uploadfile",
+                onload: function (obj) { //上传成功之后的回调
+                }
+            });
+        });
+
+
+
+        function subArticle() {
+            console.log('hello1');
+            var title = $('#articleForm input[name=title]').val();<!-- 寻找id=="articleForm"input 中name=="title"的标签-->
+            var content = $('#text').val();
+            console.log(title);
+            console.log('hello1');
+
+
+            var params = $("#articleForm").serialize();
+            console.log(params);
+            console.log('hello1');
+//    var url = $('#articleForm #articleid').val() != '' ? '/modifyArticle' : '/publishArticle';
+
+            $.post({
+                url:'/newfile1',
+                data:params,
+                success: function (result) {
+                    if (result && result.code == 'success') {
+                        tale.alertOk({
+                            text:'文章保存成功',
+                            then: function () {
+                                setTimeout(function () {
+                                    window.location.href = '/a';
+                                }, 500);
+                            }
+                        });
+                    } else {
+                        tale.alertError(result.msg || '保存文章失败');
+                    }
+                }
+            });
+        }
+
+
+        </script>
+
+    </body>
+</html>
