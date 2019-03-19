@@ -2,24 +2,17 @@ package com.example.demo.model;
 
 
 public class ArticleDomain {
-    private Integer article_id;
-    private String content;
-    private String write_time;
-    private String title;
-    private int like_count;
-    private int score;
-    private int comment_count;
-    private String type1;
-    private String type2;
-    private String type3;
 
 
+    private Integer articleId;
 
-    public Integer getArticle_id() {
-        return article_id;
+    public Integer getArticleId() {
+        return articleId;
     }
 
-
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
+    }
 
     public String getContent() {
         return content;
@@ -29,15 +22,13 @@ public class ArticleDomain {
         this.content = content;
     }
 
-    public String getWrite_time() {
-        return write_time;
+    public String getWriteTime() {
+        return writeTime;
     }
 
-    public void setWrite_time(String write_time) {
-        this.write_time = write_time;
+    public void setWriteTime(String writeTime) {
+        this.writeTime = writeTime;
     }
-
-
 
     public String getTitle() {
         return title;
@@ -47,12 +38,12 @@ public class ArticleDomain {
         this.title = title;
     }
 
-    public int getLike_count() {
-        return like_count;
+    public int getLikeCount() {
+        return likeCount;
     }
 
-    public void setLike_count(int like_count) {
-        this.like_count = like_count;
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
     }
 
     public int getScore() {
@@ -63,12 +54,12 @@ public class ArticleDomain {
         this.score = score;
     }
 
-    public int getComment_count() {
-        return comment_count;
+    public int getCommentCount() {
+        return commentCount;
     }
 
-    public void setComment_count(int comment_count) {
-        this.comment_count = comment_count;
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 
     public String getType1() {
@@ -94,6 +85,18 @@ public class ArticleDomain {
     public void setType3(String type3) {
         this.type3 = type3;
     }
+
+    private String content;
+    private String writeTime;
+    private String title;
+    private int likeCount;
+    private int score;
+    private int commentCount;
+    private String type1;
+    private String type2;
+    private String type3;
+
+
 
 
 }

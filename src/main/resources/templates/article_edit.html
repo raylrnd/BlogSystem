@@ -14,8 +14,8 @@
 
 
     <form id="articleForm" role="form" novalidate="novalidate">
-        <input type="hidden" name="article_id"
-               th:value="${article!=null}?${article.article_id}: ''" id="articleid"/>
+        <input type="hidden" name="articleId"
+               th:value="${article!=null}?${article.articleId}: ''" id="articleid"/>
     <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">文章标题</label>
@@ -114,7 +114,7 @@
                 var content = $("#editor-md-doc").val();
 
                 $.ajax({
-                    url:"/newfile",
+                    url:"/publish",
                     data: JSON.stringify({
                             article_id: article_id, title: title, type1: type1,  type2: type2, type3: type3, content: content}
                     ) ,
