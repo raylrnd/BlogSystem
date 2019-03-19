@@ -79,9 +79,7 @@
     <script type="text/javascript">
             $("#button1").click(function(){
                 var articleId = $('#articleId').val();
-                //alert(articleId);
                 var title = $('#title').val();
-                //console.log(title);
                 var type1 = $('#type1').val();
                 var type2 = $('#type2').val();
                 var type3 = $('#type3').val();
@@ -90,7 +88,7 @@
                 $.ajax({
                     url:"/publish",
                     data: JSON.stringify({
-                    'articleId': articleId, 'title': title, 'type1': type1,  'type2': type2, 'type3': type3, 'content': content}),
+                    'articleId': articleId, 'title': title, 'type1': type1,  'type2': type2, 'type3': type3, 'content': content }),
                     type:"POST",
                     contentType: "application/json;charset=utf-8",
                     success: function () {

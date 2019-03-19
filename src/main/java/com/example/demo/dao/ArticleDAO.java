@@ -8,11 +8,11 @@ import java.util.List;
 public interface ArticleDAO {
     String TABLE_NAME = " Article";
     String SELECT_FIELDS = " content,writeTime,likeCount,commentCount,title,type1,type2,type3";
-    String BASIC_FIELDS = "  content,writeTime,title,type1,type2,type3";
+    String BASIC_FIELDS = "  content,writeTime,title,type1,type2,type3,slug";
     String UPDATE_FIELDS = " articleId, content,title,type1,type2,type3";
-    String pp = "articleId , title, type1,type2,type3, writeTime";
+
     @Insert({"insert into",TABLE_NAME,"(",BASIC_FIELDS,")values (#{content},#{writeTime}" +
-            ",#{title},#{type1},#{type2},#{type3})"})
+            ",#{title},#{type1},#{type2},#{type3},#{slug})"})
     int addArticle(ArticleDomain articleDomain);
 
 
@@ -20,14 +20,10 @@ public interface ArticleDAO {
             " where articleId=#{articleId}"})
     ArticleDomain selectById(@Param("articleId") int articleId);
 
-    @Select({"select ", BASIC_FIELDS, " from ", TABLE_NAME,
-            " where title=#{title}"})
-    int selectByTitle(@Param("title") String title);
-
 
 
     @Update({"update ",TABLE_NAME,"set title = #{title} , type1 = #{type1}, type2 = #{type2}," +
-            "type3 = #{type3} , content = #{content} where articleId = #{articleId}"})
+            "type3 = #{type3} , content = #{content}, slug = #{slug} where articleId = #{articleId}"})
     int updateArticle(ArticleDomain articleDomain);
 
     @Select("select * from Article")

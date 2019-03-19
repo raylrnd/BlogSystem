@@ -14,6 +14,15 @@ public class ArticleDomain {
     private String type1;
     private String type2;
     private String type3;
+    private String slug;
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
 
 
     public Integer getArticleId() {

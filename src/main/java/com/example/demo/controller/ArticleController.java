@@ -25,12 +25,7 @@ public class ArticleController {
         return "home";
     }
 
-    @GetMapping("/edit/{articleId}")
-    public String editArticle(HttpServletRequest request, @PathVariable("articleId") int articleId){
-        ArticleDomain article = articleService.selectById(articleId);
-        request.setAttribute("article",article);
-        return "article_edit";
-    }
+
 
     @GetMapping("/newfile")
     public String newfile(){
@@ -44,10 +39,11 @@ public class ArticleController {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
             articleDomain.setWriteTime(date);
+            articleDomain.setSlug(articleDomain.getContent().substring(0,100));
             articleService.addArticle(articleDomain);
         }
         else {
-            System.out.print("asd");
+
             articleService.updateArticle(articleDomain);
         }
         return "{success}";
@@ -61,6 +57,18 @@ public class ArticleController {
         return "article_list";
     }
 
+    @GetMapping("/article/{articleId}")
+    public String articleView(HttpServletRequest request,@PathVariable("articleId") int articleId){
+        ArticleDomain article = articleService.selectById(articleId);
+        request.setAttribute("article",article);
+        return "home_article_view";
+    }
 
+    @GetMapping("/edit/{articleId}")
+    public String editArticle(HttpServletRequest request, @PathVariable("articleId") int articleId){
+        ArticleDomain article = articleService.selectById(articleId);
+        request.setAttribute("article",article);
+        return "article_edit";
+    }
 
 }
