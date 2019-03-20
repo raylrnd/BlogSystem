@@ -93,7 +93,8 @@
                         <!--
                         文章List
                         -->
-                        <span th:each="i: ${#numbers.sequence(0,10)}">
+
+                        <span th:each="article : ${article_list}">
                         <div class="content-box  " style="margin-bottom: 27px;">
 
                                 <div class="columns" style="min-height: 230px;">
@@ -104,30 +105,10 @@
 
                                     <div class="column is-8-desktop post-content is-flex align-center">
                                         <div class="content">
-                                            <h3>Images</h3>
-
-                                            <p>
-
-                                            </p>
-                                            <p>
-                                                This is a image test post.
-
-
-                                                图片来自电影《127小时》
-
-
-
-                                                图片来自电影《2001太空漫游》
-
-
-
-                                                图片来自纪录片《寻找小糖人》
-
-
-
-                                            </p>
-                                            <p>2013-12-26</p>
-                                            <a class="post-hover" href="/Claudia-theme-blog/2013/12/25/excerpts/">
+                                            <h3 th:text="${article.title}"></h3>
+                                            <p th:text="${article.slug}"></p>
+                                            <p th:text="${article.writeTime}"></p>
+                                            <a class="post-hover" th:href="@{'/article/'+${article.articleId}}">
                                                 <button class="button is-small">Read More</button></a>
                                         </div>
                                     </div>
@@ -220,21 +201,18 @@
                                     <img class="avatar" src="https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-shadow-circle-512.png">
                                 </header>
                                 <section class="has-text-centered">
-                                    <h3><strong>Diskobólos</strong></h3>
-                                    <p class="sub-title">A Touch Of Zen</p>
+                                    <h3><strong>shunchao</strong></h3>
+                                    <p class="sub-title">coding right now</p>
 
                                     <p class="is-flex center" style=" color: gray">
                                         <i class="fa fa-map-marker" style="padding: 5px"></i>
-                                        Hefei
+                                        USTC Hefei
                                     </p>
 
                                 </section>
                             </div>
                             <div class="top-line">
                                 <ul class="sns-container justify-center is-flex has-padding">
-
-
-
                                     <li>
                                         <a target="_blank" href="https://baidu.com">
                                         <span class="fa-stack fa-lg">
@@ -287,7 +265,15 @@
                                 <strong>Categories</strong>
                             </div>
                             <div class="content-inner">
-                                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Claudia-theme-blog/categories/Foo/">Foo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Claudia-theme-blog/categories/Gallery/">Gallery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Claudia-theme-blog/categories/Tags/">Tags</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/Claudia-theme-blog/categories/elements/">elements</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Claudia-theme-blog/categories/excerpts/">excerpts</a><span class="category-list-count">2</span></li></ul>
+                                <ul class="category-list">
+                                    <li class="category-list-item" th:each="category : ${categories}">
+                                    <a class="category-list-link" href="/Claudia-theme-blog/categories/Foo/" th:utext="${category.type}"></a>
+                                    <span class="category-list-count" th:utext="${category.count}"></span>
+
+                                    </li>
+
+
+                                </ul>
                             </div>
                         </div>
                         <div class="content-inner content-box">

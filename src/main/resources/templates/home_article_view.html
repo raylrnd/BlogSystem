@@ -144,13 +144,15 @@
             <div class="is-flex align-center">
                 <img class="post-avatar" src="/lib/male-shadow-circle-512.png">
                 <span style="padding:0 10px;">
-                <span class="post-date sub-title">2013-12-24</span>
+                <span class="post-date sub-title" th:utext="${article.writeTime}"></span>
                 </span></div>
 
                 <div>
 
-                <a class="tag is-post-tag" href="https://haojen.github.io/Claudia-theme-blog/tags/excerpts/"  th:utext = "${article.type1}"></a>
-                <a class="tag is-post-tag" href="https://haojen.github.io/Claudia-theme-blog/tags/excerpts2/" th:utext = "${article.type2}"></a>
+                <a class="tag is-post-tag" href="https://haojen.github.io/Claudia-theme-blog/tags/excerpts/"
+                   th:if = "${article.type1 != ''}" th:utext = "${article.type1}"></a>
+                <a class="tag is-post-tag" href="https://haojen.github.io/Claudia-theme-blog/tags/excerpts2/"
+                   th:if = "${article.type2 != ''}" th:utext = "${article.type2}"></a>
                     <a class="tag is-post-tag" href="https://haojen.github.io/Claudia-theme-blog/tags/excerpts2/"
                        th:if = "${article.type3 != ''}" th:utext = "${article.type3}"></a>
                 </div>

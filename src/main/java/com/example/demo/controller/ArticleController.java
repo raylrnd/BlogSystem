@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.ArticleDomain;
 import com.example.demo.model.CommentDomain;
+import com.example.demo.model.MetaDomain;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,14 @@ public class ArticleController {
     @Autowired
     private CommentService commentService;
     @GetMapping("/")
-    public String article(){
+    public String article(HttpServletRequest request){
+        List<ArticleDomain> articleDomains = articleService.listArticle();
+        List<MetaDomain> metaDomains = articleService.listAllTypes();
+        request.setAttribute("article_list",articleDomains);
+        request.setAttribute("categories", metaDomains);
+
         return "home";
     }
-
 
 
     @GetMapping("/newfile")
@@ -56,6 +61,7 @@ public class ArticleController {
         request.setAttribute("article_list",articleDomains);
         return "article_list";
     }
+
 
     @GetMapping("/article/{articleId}")
     public String articleView(HttpServletRequest request,@PathVariable("articleId") int articleId){

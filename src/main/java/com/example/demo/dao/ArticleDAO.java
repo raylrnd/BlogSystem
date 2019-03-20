@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 import com.example.demo.model.ArticleDomain;
+import com.example.demo.model.MetaDomain;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface ArticleDAO {
     String TABLE_NAME = " Article";
-    String SELECT_FIELDS = " content,writeTime,likeCount,commentCount,title,type1,type2,type3";
+    String SELECT_FIELDS = " articleId, content,writeTime,likeCount,commentCount,title,type1,type2,type3";
     String BASIC_FIELDS = "  content,writeTime,title,type1,type2,type3,slug";
     String UPDATE_FIELDS = " articleId, content,title,type1,type2,type3";
 
@@ -16,7 +17,7 @@ public interface ArticleDAO {
     int addArticle(ArticleDomain articleDomain);
 
 
-    @Select({"select ", UPDATE_FIELDS, " from ", TABLE_NAME,
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME,
             " where articleId=#{articleId}"})
     ArticleDomain selectById(@Param("articleId") int articleId);
 
@@ -28,4 +29,11 @@ public interface ArticleDAO {
 
     @Select("select * from Article")
     List<ArticleDomain> listALL();
+//select type1 ,count(type1) as count from (select type1 from article
+// union all select type2 from article union all select type3 from article) tt group by type1;
+    @Select({"select type1 as type ,count(type1) as count from (select type1 from article " +
+            "union all select type2 from article union all select type3 from article) tt group by type1"})
+    List<MetaDomain> listAllType();
+
+
 }
