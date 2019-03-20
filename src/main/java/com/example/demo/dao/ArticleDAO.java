@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 import com.example.demo.model.ArticleDomain;
 import com.example.demo.model.MetaDomain;
+import com.example.demo.model.WriteTimeDomain;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -29,11 +30,11 @@ public interface ArticleDAO {
 
     @Select("select * from Article")
     List<ArticleDomain> listALL();
-//select type1 ,count(type1) as count from (select type1 from article
-// union all select type2 from article union all select type3 from article) tt group by type1;
+
     @Select({"select type1 as type ,count(type1) as count from (select type1 from article " +
             "union all select type2 from article union all select type3 from article) tt group by type1"})
     List<MetaDomain> listAllType();
 
-
+    @Select({"select writeTime from" ,TABLE_NAME})
+    List<WriteTimeDomain> listWriteTime();
 }

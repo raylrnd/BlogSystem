@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.ArticleDomain;
 import com.example.demo.model.CommentDomain;
 import com.example.demo.model.MetaDomain;
+import com.example.demo.model.WriteTimeDomain;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -25,9 +27,10 @@ public class ArticleController {
     public String article(HttpServletRequest request){
         List<ArticleDomain> articleDomains = articleService.listArticle();
         List<MetaDomain> metaDomains = articleService.listAllTypes();
+        HashMap<String,Integer> YM = articleService.listWriteTime();
         request.setAttribute("article_list",articleDomains);
         request.setAttribute("categories", metaDomains);
-
+        request.setAttribute("YM",YM);
         return "home";
     }
 
@@ -40,15 +43,14 @@ public class ArticleController {
     @PostMapping ("/publish")
     @ResponseBody
     public String Publish(@RequestBody ArticleDomain articleDomain) {
+        articleDomain.setSlug(articleDomain.getContent().substring(0,100));
         if(articleDomain.getArticleId() == null)  {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
             articleDomain.setWriteTime(date);
-            articleDomain.setSlug(articleDomain.getContent().substring(0,100));
             articleService.addArticle(articleDomain);
         }
         else {
-
             articleService.updateArticle(articleDomain);
         }
         return "{success}";

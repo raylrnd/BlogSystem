@@ -2,6 +2,7 @@ package com.example.demo.service;
 import com.example.demo.dao.ArticleDAO;
 import com.example.demo.model.ArticleDomain;
 import com.example.demo.model.MetaDomain;
+import com.example.demo.model.WriteTimeDomain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,17 @@ public class ArticleService {
     }
     public List<MetaDomain> listAllTypes(){
         return articleDAO.listAllType();
+    }
+    public HashMap<String,Integer> listWriteTime(){
+        HashMap<String,Integer> YM = new HashMap<>();
+        List<WriteTimeDomain> writeTimeDomain =  articleDAO.listWriteTime();
+        for(WriteTimeDomain writeTime : writeTimeDomain){
+            String yearAndMounth = writeTime.getWriteTime().substring(0,7);
+            if(YM.containsKey(yearAndMounth))
+                YM.put(yearAndMounth,YM.get(yearAndMounth)+1);
+            else
+                YM.put(yearAndMounth,1);
+        }
+        return YM;
     }
 }
