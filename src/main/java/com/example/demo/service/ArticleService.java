@@ -42,4 +42,12 @@ public class ArticleService {
         }
         return YM;
     }
+
+    public List<ArticleDomain> selectByTime(String time) {
+        return  articleDAO.selectByTime(time);
+    }
+
+    public List<ArticleDomain> selectByType(String type) {
+        return articleDAO.selectByType(type);
+    }
 }

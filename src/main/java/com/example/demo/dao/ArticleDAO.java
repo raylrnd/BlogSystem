@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface ArticleDAO {
     String TABLE_NAME = " Article";
-    String SELECT_FIELDS = " articleId, content,writeTime,likeCount,commentCount,title,type1,type2,type3";
+    String SELECT_FIELDS = " articleId, content,writeTime,commentCount,title,type1,type2,type3";
     String BASIC_FIELDS = "  content,writeTime,title,type1,type2,type3,slug";
     String UPDATE_FIELDS = " articleId, content,title,type1,type2,type3";
 
@@ -37,4 +37,10 @@ public interface ArticleDAO {
 
     @Select({"select writeTime from" ,TABLE_NAME})
     List<WriteTimeDomain> listWriteTime();
+//select * from article where  left(writeTime,7)  = '2019-03';
+    @Select({"select * from ", TABLE_NAME,"where left(writeTime,7)  = #{time}"})
+    List<ArticleDomain> selectByTime(String time);
+
+    @Select({"select * from",TABLE_NAME,"where type1 = #{type} or type2 = #{type} or type3 = #{type}"})
+    List<ArticleDomain> selectByType(String type);
 }

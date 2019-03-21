@@ -1,16 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.ArticleDomain;
-import com.example.demo.model.CommentDomain;
 import com.example.demo.model.MetaDomain;
-import com.example.demo.model.WriteTimeDomain;
 import com.example.demo.service.ArticleService;
-import com.example.demo.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,8 +17,7 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
-    @Autowired
-    private CommentService commentService;
+
     @GetMapping("/")
     public String article(HttpServletRequest request){
         List<ArticleDomain> articleDomains = articleService.listArticle();
@@ -77,6 +72,20 @@ public class ArticleController {
         ArticleDomain article = articleService.selectById(articleId);
         request.setAttribute("article",article);
         return "article_edit";
+    }
+
+    @GetMapping("/time/{time}")
+    public String selectByTime(HttpServletRequest request,@PathVariable String time){
+        List<ArticleDomain> article_list = articleService.selectByTime(time);
+        request.setAttribute("article_list",article_list);
+        return "home";
+    }
+
+    @GetMapping("/type/{type}")
+    public String selectByType(HttpServletRequest request,@PathVariable String type){
+        List<ArticleDomain> article_list = articleService.selectByType(type);
+        request.setAttribute("article_list",article_list);
+        return "home";
     }
 
 }

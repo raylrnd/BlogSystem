@@ -267,7 +267,7 @@
                             <div class="content-inner">
                                 <ul class="category-list">
                                     <li class="category-list-item" th:each="category : ${categories}">
-                                    <a class="category-list-link" href="/Claudia-theme-blog/categories/Foo/" th:utext="${category.type}"></a>
+                                    <a class="category-list-link" th:href="@{'/type/'+${category.type}}" th:utext="${category.type}"></a>
                                     <span class="category-list-count" th:utext="${category.count}"></span>
 
                                     </li>
@@ -283,7 +283,7 @@
                             <div class="content-inner">
                                 <ul class="archive-list">
                                     <li class="archive-list-item" th:each="ym : ${YM}">
-                                        <a class="archive-list-link" href="/Claudia-theme-blog/archives/2017/07/" th:utext="${ym.key}"></a>
+                                        <a class="archive-list-link" th:href="@{'/time/'+${ym.key}}" th:utext="${ym.key}"></a>
                                         <span class="archive-list-count" th:utext="${ym.value}"></span>
                                     </li>
 
