@@ -19,7 +19,7 @@ public class ArticleController {
 
     @GetMapping("/")
     public String article(){
-        return "one_article_view";
+        return "personalHome";
     }
     @GetMapping("/personalHome")
     public String article(HttpServletRequest request){

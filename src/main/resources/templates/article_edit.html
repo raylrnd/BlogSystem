@@ -6,14 +6,33 @@
     <title>Simple example - Editor.md examples</title>
     <link rel="stylesheet" href="/editormd/css/editormd.css" />
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+
+    <link rel="stylesheet" href="/lib/common.css">
+    <link rel="stylesheet" href="/lib/nav.css">
+    <link rel="stylesheet" href="/lib/layout.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <link rel="stylesheet" href="/lib/animate.min.css">
+    <link rel="stylesheet" href="/css/semantic.min.css">
+    <link rel="stylesheet" href="/lib/bulma.min.css">
+    <!-- Bootstrap Core CSS -->
+    <!--
+        <link rel="stylesheet" href="../lib/bootstrap.css">
+    -->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/lib/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/lib/syntax.css">
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
 </head>
-<div th:replace="header::headerFragment"></div>
+
 <br>
     <body>
+    <div th:replace="home_header::home-header"></div>
+    <br>
 
-
-
-    <form id="articleForm" role="form" novalidate="novalidate">
+    <form id="articleForm" role="form" novalidate="novalidate" style="margin-top: 50px">
         <input type="hidden" name="articleId"
                th:value="${article!=null} ? ${article.articleId}: ''" id="articleId"/>
     <div class="layui-form-item">

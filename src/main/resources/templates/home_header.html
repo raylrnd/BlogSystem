@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="/js/home.js"></script>
+    <link rel="stylesheet" media="all" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
+
+
+
 </head>
 <div th:fragment="home-header">
     <header id="navbar" class="overflow-hidden">
@@ -16,9 +22,9 @@
                     </div>
                     <a id="search_result"><li> asasvavasvas</li> </a>
                     <hr width="100%" style="margin-top:-5px;border:1px solid yellow;"/>
-                    <a id="search_result"><li> asasvavasvas</li> </a>
+                    <a id="search_result1"><li> asasvavasvas</li> </a>
                     <hr width="100%" style="margin-top:-5px;border:1px solid yellow;"/>
-                    <a id="search_result"><li> asasvavasvas</li> </a>
+                    <a id="search_result2"><li> asasvavasvas</li> </a>
                 </div>
 
                 <div class="nav-right nav-menu">
@@ -33,17 +39,20 @@
                     <a class="nav-item" href="/hotArticles" >
                         热门文章
                     </a>
-                    <a class="nav-item" href="/login" th:if="${user == null}">
+                    <a class="nav-item" href="/login" th:if="${article_list == null}">
                         登陆|注册
                     </a>
-                    <a class="nav-item" href="/personalBlog" th:if="${user != null}">
+                    <a class="nav-item" href="/personalBlog" th:if="${article_list != null}">
                         个人首页
                     </a>
-                    <a class="nav-item" href="/personalBlog" th:if="${user != null}">
+                    <a class="nav-item" href="/massege" th:if="${article_list != null}">
                         站内信
                     </a>
-                    <a class="nav-item" href="/personalBlog" th:if="${user != null}">
+                    <a class="nav-item" href="/newfile" th:if="${article_list != null}">
                         写文章
+                    </a>
+                    <a class="nav-item" href="/list" th:if="${article_list != null}">
+                        管理文章
                     </a>
                 </div>
                 <span class="nav-toggle" id="navMenuDropdown">
@@ -55,5 +64,6 @@
             </div>
         </div>
     </header>
+
 </div>
 </html>
