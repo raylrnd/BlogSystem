@@ -26,14 +26,25 @@
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </a>
 
+
                     <a class="nav-item" href="/">
-                        Home
+                        最新文章
                     </a>
-
-                    <a class="nav-item" href="/about">
-                        About
+                    <a class="nav-item" href="/hotArticles" >
+                        热门文章
                     </a>
-
+                    <a class="nav-item" href="/login" th:if="${user == null}">
+                        登陆|注册
+                    </a>
+                    <a class="nav-item" href="/personalBlog" th:if="${user != null}">
+                        个人首页
+                    </a>
+                    <a class="nav-item" href="/personalBlog" th:if="${user != null}">
+                        站内信
+                    </a>
+                    <a class="nav-item" href="/personalBlog" th:if="${user != null}">
+                        写文章
+                    </a>
                 </div>
                 <span class="nav-toggle" id="navMenuDropdown">
             <span></span>

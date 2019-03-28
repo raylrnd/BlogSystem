@@ -11,7 +11,7 @@ public class HomeController {
     }
     @RequestMapping("/a")
     public String get(){
-        return "home_article_view";
+        return "one_article_view";
     }
 
 }

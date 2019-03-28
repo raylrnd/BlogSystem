@@ -17,8 +17,11 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
-
     @GetMapping("/")
+    public String article(){
+        return "one_article_view";
+    }
+    @GetMapping("/personalHome")
     public String article(HttpServletRequest request){
         List<ArticleDomain> articleDomains = articleService.listArticle();
         List<MetaDomain> metaDomains = articleService.listAllTypes();
@@ -26,7 +29,7 @@ public class ArticleController {
         request.setAttribute("article_list",articleDomains);
         request.setAttribute("categories", metaDomains);
         request.setAttribute("YM",YM);
-        return "home";
+        return "personalHome";
     }
 
 
@@ -64,7 +67,7 @@ public class ArticleController {
     public String articleView(HttpServletRequest request,@PathVariable("articleId") int articleId){
         ArticleDomain article = articleService.selectById(articleId);
         request.setAttribute("article",article);
-        return "home_article_view";
+        return "one_article_view";
     }
 
     @GetMapping("/edit/{articleId}")
@@ -78,14 +81,14 @@ public class ArticleController {
     public String selectByTime(HttpServletRequest request,@PathVariable String time){
         List<ArticleDomain> article_list = articleService.selectByTime(time);
         request.setAttribute("article_list",article_list);
-        return "home";
+        return "personalHome";
     }
 
     @GetMapping("/type/{type}")
     public String selectByType(HttpServletRequest request,@PathVariable String type){
         List<ArticleDomain> article_list = articleService.selectByType(type);
         request.setAttribute("article_list",article_list);
-        return "home";
+        return "personalHome";
     }
 
 }
